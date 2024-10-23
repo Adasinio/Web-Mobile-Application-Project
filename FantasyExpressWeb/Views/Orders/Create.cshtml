@@ -1,0 +1,53 @@
+﻿@model FantasyExpressApi.Models.TableClasses.Order
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h4 style ="color: #561F01">Order</h4>
+<hr style="color: #561F01" />
+<div class="row" style="color: #561F01">
+    <div class="col-md-4">
+        <form asp-action="Data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DeliveryId" class="control-label"></label>
+                <select asp-for="DeliveryId" class="form-control" asp-items="ViewBag.DeliveryId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentId" class="control-label"></label>
+                <select asp-for="PaymentId" class="form-control" asp-items="ViewBag.PaymentId"></select>
+            </div>
+            <hr style="color: #561F01" />
+            <div class="form-group">
+                <input type="submit" value="Order from Cart" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DeliveryId" class="control-label"></label>
+                <select asp-for="DeliveryId" class ="form-control" asp-items="ViewBag.DeliveryId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentId" class="control-label"></label>
+                <select asp-for="PaymentId" class ="form-control" asp-items="ViewBag.PaymentId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>*@
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

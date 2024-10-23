@@ -1,0 +1,69 @@
+﻿@model IEnumerable<FantasyExpressApi.Models.TableClasses.Meal>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<table class="table">
+    <thead style="color: #561F01">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MealType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Restaurant)
+            </th>            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr style="color: #561F01">
+            <td>
+                <img src="@item.Url" width="100" height="100"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MealType.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Restaurant.Name)
+            </td>
+            <td>
+                    <a asp-action="AddToCart" asp-controller="Cart" asp-route-id="@item.Id">Add to cart</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>

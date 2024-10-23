@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FantasyExpress.Views.AboutPage"
+             xmlns:vm="clr-namespace:FantasyExpress.ViewModels"
+             Title="{Binding Title}">
+    
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">green</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="300" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <ContentView Grid.Row="1" Padding="-30">
+            <Image Source="Assets/feast.png" Scale="1.55" HorizontalOptions="Center" VerticalOptions="Center"/>
+        </ContentView>
+
+        <ScrollView Grid.Row="2">
+            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Label Text="ZGŁODNIAŁEŚ?" 
+                       FontSize="30" 
+                       FontAttributes="Bold"
+                       TextColor="#FDB515"
+                       HorizontalTextAlignment="Center"/>
+                <Label Text="Czas na ucztę!" 
+                       FontSize="18" 
+                       FontAttributes="Bold"
+                       TextColor="#FDB515"
+                       Padding="0,0,0,0" 
+                       HorizontalTextAlignment="Center"/>
+                <Button Margin="60,10,60,0" Text="ZAMÓW!"
+                        Clicked="Button_Clicked"
+                        BackgroundColor="#FDB515"
+                        TextColor="#561F01" 
+                        FontAttributes="Bold"
+                        FontSize="Title"/>
+            </StackLayout>
+        </ScrollView>
+
+        <Image Grid.Row="3" Source="Assets/logo-no-background.png" Scale="1.3" WidthRequest="150" HeightRequest="150" />
+
+
+
+        <!--<StackLayout Grid.Row="3">
+            <Label Text="FANTASY EXPRESS" 
+                   FontSize="23" 
+                   HorizontalTextAlignment="Center"/>
+            <Label Text="Feast like a dragon!" 
+                   FontSize="17" 
+                   HorizontalTextAlignment="Center" 
+                   Padding="0,0,0,0"/>
+        </StackLayout>-->
+    </Grid>
+
+</ContentPage>

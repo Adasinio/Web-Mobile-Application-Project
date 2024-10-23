@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:FantasyExpress.ViewModels.CartViewModel"
+             x:Class="FantasyExpress.Views.CartView.CartView">
+
+    <ContentPage.BindingContext>
+        <vm:CartViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <Grid><!--IsVisible="{Binding Loaded, Mode=OneWay}">-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="2" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="2" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="1" 
+               FontSize="30" 
+               FontAttributes="Bold"
+               Text="Your Cart"
+               TextColor="#FDB515"
+               HorizontalOptions="Center"
+               TextTransform="Uppercase"
+               Margin="15,0,15,15"/>
+
+            <Rectangle Grid.Row="2" BackgroundColor="#561F01"/>
+
+            <StackLayout Grid.Row="3" Margin="0,5,0,0">
+                <ListView x:Name="orderItemsListView"
+                            ItemsSource="{Binding Meals, Mode=OneWay}"
+                            HasUnevenRows="True"
+                            VerticalScrollBarVisibility="Default">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid HeightRequest="60">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Grid.Column="0" Source="{Binding Url, Mode=OneWay}" Aspect="AspectFill" HeightRequest="50" WidthRequest="50" Margin="15,0,5,0"/>
+                                    <StackLayout Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                                        <Label Text="{Binding Name, Mode=OneWay}" FontAttributes="Bold" FontSize="20" Margin="0,5,0,0"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="2" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Margin="0,0,15,0">
+                                        <Label Text="{Binding Price, Mode=OneWay, StringFormat='{0:C}'}" />
+                                    </StackLayout>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <Grid Grid.Row="4" Margin="15,0,15,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" 
+                   FontSize="20" 
+                   FontAttributes="Bold"
+                   Text="Delivery Options:"/>
+                <Picker Grid.Row="1" Grid.Column="0"
+                    HeightRequest="35" WidthRequest="200" ItemsSource="{Binding DeliveryList}" ItemDisplayBinding="{Binding Name}" 
+                    SelectedItem="{Binding SelectedDelivery}" FontSize="Medium" Margin="0" />
+                <Button Grid.Row="1" Grid.Column="1"
+                    Text="+" WidthRequest="35" HeightRequest="35" Clicked="NewDeliveryButton" HorizontalOptions="Start" Background="#FDB515" TextColor="#561F01"></Button>
+            </Grid>
+
+            <Grid Grid.Row="5" Margin="15,0,15,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" 
+                   FontSize="20" 
+                   FontAttributes="Bold"
+                   Text="Payment Options:"/>
+                <Picker Grid.Row="1" Grid.Column="0"
+                    HeightRequest="35" WidthRequest="200" ItemsSource="{Binding PaymentList}" ItemDisplayBinding="{Binding Name}" 
+                    SelectedItem="{Binding SelectedPayment}" FontSize="Medium" Margin="0" />
+                <Button Grid.Row="1" Grid.Column="1"
+                    Text="+" WidthRequest="35" HeightRequest="35" Clicked="NewPaymentButton" HorizontalOptions="Start" Background="#FDB515" TextColor="#561F01"  ></Button>
+            </Grid>
+
+            <Grid Grid.Row="6" Margin="15,15,15,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0"
+                       FontSize="20" 
+                       FontAttributes="Bold"
+                       Text="Total:"/>
+                <Label Grid.Column="1"
+                       FontSize="20" 
+                       FontAttributes="None"
+                       Text="{Binding OrderTotalPrice, Mode=OneWay}"/>
+                <!--TODO: add total price to order table-->
+            </Grid>
+
+            <Rectangle Grid.Row="7" BackgroundColor="#561F01"/>
+            
+            <Button Grid.Row="8" Margin="60,10,60,0" Text="Order"
+                Command="{Binding OpenPaymentCommand}"
+                BackgroundColor="#FDB515"
+                TextColor="#561F01" 
+                TextTransform="Uppercase"
+                FontAttributes="Bold"
+                FontSize="Title"/>
+            <!--TODO: add payment fake view"-->
+
+        </Grid>
+
+        <!--<Grid IsVisible="{Binding Loading,Mode=OneWay}">
+            <ActivityIndicator IsRunning="True" Color="Orange" IsVisible="true"/>
+        </Grid>-->
+    </Grid>
+    
+</ContentPage>

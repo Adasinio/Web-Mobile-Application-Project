@@ -1,0 +1,81 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ViewModels\OrderItemViewModel\**" />
+    <Compile Remove="ViewModels\OrderViewModel\**" />
+    <Compile Remove="Views\OrderItemViews\**" />
+    <Compile Remove="Views\OrderViews\**" />
+    <EmbeddedResource Remove="ViewModels\OrderItemViewModel\**" />
+    <EmbeddedResource Remove="ViewModels\OrderViewModel\**" />
+    <EmbeddedResource Remove="Views\OrderItemViews\**" />
+    <EmbeddedResource Remove="Views\OrderViews\**" />
+    <None Remove="ViewModels\OrderItemViewModel\**" />
+    <None Remove="ViewModels\OrderViewModel\**" />
+    <None Remove="Views\OrderItemViews\**" />
+    <None Remove="Views\OrderViews\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.15.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <OpenApiReference Include="OpenAPIs\swagger.json" CodeGenerator="NSwagCSharp">
+      <SourceUri>https://localhost:7124/swagger/v1/swagger.json</SourceUri>
+    </OpenApiReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\RestaurantViews\AllRestaurantsView.xaml.cs">
+      <DependentUpon>AllRestaurantsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\RestaurantViews\RestaurantView.xaml.cs">
+      <DependentUpon>RestaurantView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\CartView\CartView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\DeliveryViews\NewDeliveryView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MealViews\AllMealsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MealViews\MealView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MealViews\NewMealView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PaymentViews\NewPaymentView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\RestaurantViews\NewRestaurantView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties openapis_4swagger_1json__JsonSchema="https://json.schemastore.org/tslint.json" /></VisualStudio></ProjectExtensions>
+</Project>

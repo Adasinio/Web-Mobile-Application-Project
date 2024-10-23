@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FantasyExpress.ViewModels.MealViewModel"
+             x:Class="FantasyExpress.Views.MealViews.AllMealsView">
+
+    <ContentPage.BindingContext>
+        <vm:AllMealsViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+
+        <Grid>
+            <Grid IsVisible="{Binding Loaded, Mode=OneWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="2" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="2" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="1" Orientation="Horizontal">
+                    <Image WidthRequest="100" Source="Assets/logo-no-background.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="OnLogoTapped" 
+                                NumberOfTapsRequired="1"
+                                />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label  
+                        VerticalTextAlignment="Center"
+                        FontSize="30"
+                        TextColor="#FDB515"
+                        Text="Na co masz dzisiaj ochotę?"
+                        Margin="15,0,15,5"/>
+                </StackLayout>
+
+                <Rectangle Grid.Row="2" BackgroundColor="#561F01"/>
+
+                <StackLayout Grid.Row="3" Margin="0,5,0,0">
+                    <ListView x:Name="mealListView"
+                            ItemsSource="{Binding Meals, Mode=OneWay}"
+                            HasUnevenRows="True"
+                            ItemSelected="OnMealSelected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid HeightRequest="110">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Grid.Column="0" Source="{Binding Url, Mode=OneWay}" Aspect="AspectFill" HeightRequest="100" WidthRequest="100" Margin="15,0,5,0"/>
+                                        <StackLayout Grid.Column="1" HorizontalOptions="StartAndExpand">
+                                            <Label Text="{Binding Name, Mode=OneWay}" FontAttributes="Bold" FontSize="20" Margin="0,5,0,0"/>
+                                            <Label Text="{Binding Description, Mode=OneWay}" FontSize="16"/>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="2" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Margin="0,0,15,0">
+                                            <Label Text="{Binding Price, Mode=OneWay, StringFormat='{0:C}'}" />
+                                        </StackLayout>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+
+                <Rectangle Grid.Row="6" BackgroundColor="#561F01"/>
+                
+                <Button Grid.Row="8"  BackgroundColor="#561F01" Text="Add New" Clicked="NewMealButton"  HorizontalOptions="Start" VerticalOptions="Start" FontSize="7" TextColor="#FDB515"/>
+            </Grid>
+
+            <Grid IsVisible="{Binding Loading,Mode=OneWay}">
+                <ActivityIndicator IsRunning="True" Color="#FDB515" IsVisible="true"/>
+            </Grid>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

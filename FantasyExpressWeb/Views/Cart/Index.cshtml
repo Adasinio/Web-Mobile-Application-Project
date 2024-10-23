@@ -1,0 +1,47 @@
+﻿@model FantasyExpressWeb.Models.CartData
+@{
+    ViewData["Title"] = "Cart";
+}
+<h2 style="color: #561F01">Your Cart</h2>
+<div>
+    <table style="color: #561F01; border-collapse:separate;border-spacing:20px">
+        <tr>
+            <th>
+                Image
+            </th>
+            <th>
+                Meal Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.CartItemList)
+        {
+            <tr >
+                <td>
+                 <img src="@item.Meal.Url" width="100" height="100"/>
+                </td>
+                <td>
+                    @*@item.Meal.Name*@
+                    <a asp-action="Details" asp-controller="Meals" asp-route-id="@item.MealId">@item.Meal.Name</a> 
+                </td>
+                <td>
+                    @String.Format("{0:F}", item.Meal.Price)
+                </td>
+                <td>
+                    @String.Format("{0:F}", item.Quantity)
+                </td>
+                <td>
+                    @*<a href="#">Remove</a>*@
+                </td>
+            </tr>
+        }
+    </table>
+    <h4 style="color: #561F01">Total:@String.Format("{0:F}", Model.Total) </h4>
+    <p style ="color: #561F01;font-size:12px";>You can finish your order in the next tab</p>
+</div>

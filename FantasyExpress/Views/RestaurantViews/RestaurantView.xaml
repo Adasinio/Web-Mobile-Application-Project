@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:FantasyExpress.ViewModels.RestaurantViewModel" 
+             xmlns:model="clr-namespace:FantasyExpress"
+             xmlns:vm="clr-namespace:FantasyExpress.ViewModels.RestaurantViewModel"
+             x:Class="FantasyExpress.Views.RestaurantViews.RestaurantView"
+             x:Name="BrowseItemsPage"
+             Title="{Binding Title}"
+             >
+
+    <ContentPage.BindingContext>
+        <vm:RestaurantViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <Grid IsVisible="{Binding Loaded, Mode=OneWay}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="2" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Orientation="Vertical" Grid.Row="2" > 
+            <ContentView >
+                <Image WidthRequest="100" Source="Assets/logo-no-background.png" HorizontalOptions="Start">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                                Tapped="OnLogoTapped" 
+                                NumberOfTapsRequired="1"
+                                />
+                    </Image.GestureRecognizers>
+                </Image>
+            </ContentView>
+
+            <Rectangle HeightRequest="2" BackgroundColor="#561F01"/>
+
+            <ContentView Padding="30,0">
+                <Image Source="{Binding PhotoUrl, Mode=OneWay}" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </ContentView>
+            </StackLayout>
+
+            <Label Grid.Row="3" 
+               FontSize="30" 
+               FontAttributes="Bold"
+               Text="{Binding Name, Mode=OneWay}"
+               Margin="15,15,15,10"/>
+
+            <StackLayout Grid.Row="4" Margin="15,0,15,0">
+                <Label 
+               FontSize="20" 
+               FontAttributes="Bold"
+               Text="Opis:"/>
+                <Label 
+               FontSize="20" 
+               FontAttributes="None"
+               Text="{Binding Description, Mode=OneWay}"/>
+            </StackLayout>
+
+
+
+            <Rectangle Grid.Row="6" BackgroundColor="#561F01"/>
+
+            <Button Grid.Row="7" Margin="60,10,60,0" Text="Przejrzyj Menu"
+                Clicked="Button_Clicked"
+                BackgroundColor="#FDB515"
+                TextColor="#561F01" 
+                TextTransform="Uppercase"
+                FontAttributes="Bold"
+                FontSize="Title"/>
+
+        </Grid>
+
+        <Grid IsVisible="{Binding Loading,Mode=OneWay}">
+            <ActivityIndicator IsRunning="True" Color="#FDB515" IsVisible="true"/>
+        </Grid>
+    </Grid>
+
+</ContentPage>
